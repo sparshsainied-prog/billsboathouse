@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Bill's Boathouse | A floating tiny house for two on the Murray River</title>
+<meta name="description" content="A tiny house moored on the Murray River at White Sands, South Australia, for two. A website idea made by Lamplit Studio for Bill's Boathouse. Not their official site.">
+<meta property="og:title" content="Bill's Boathouse">
+<meta property="og:description" content="A website idea made by Lamplit Studio for Bill's Boathouse. Not their official site.">
+<meta property="og:image" content="https://sparshsainied-prog.github.io/billsboathouse/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://sparshsainied-prog.github.io/billsboathouse/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/swan-mark.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="img/hero-back.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="img/hero-front.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Colours come from their logo and their photos (brand.md). Slate is the logo lettering,
+   the accent is the swan's bill, the light is the grey morning sky over the willows. */
+:root{
+  --dark:#16262f;
+  --slate:#254151;
+  --light:#e3e7e8;
+  --paper:#f1f3f3;
+  --accent:#9c3d48;
+  --wave:#4b7fb5;
+  --ink:#0b0f11;
+  --muted:#4f5f67;
+  --rule:#c6cdd0;
+  --display:"Fira Sans","Segoe UI",sans-serif;
+  --text:"Source Serif 4",Georgia,serif;
+  --gut:max(18px,env(safe-area-inset-left,0px));
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body.still .brand{color:#f3f5f5}
+body{margin:0;background:var(--light);color:var(--ink);font:400 18px/1.6 var(--text)}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.1;margin:0;color:var(--slate);text-wrap:balance}
+p{margin:0 0 1em;text-wrap:pretty}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px;box-shadow:0 0 0 6px #fff}
+.wrap{max-width:1240px;margin:0 auto;padding:0 var(--gut)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;font:600 17px/1 var(--display);text-decoration:none;border-radius:2px;background:var(--accent);color:#fff;border:2px solid var(--accent)}
+.btn:hover{background:#86323c;border-color:#86323c}
+.btn.line{background:transparent;color:var(--slate);border-color:var(--slate)}
+.btn.line:hover{background:var(--slate);color:#fff}
+.on-dark .btn.line{color:var(--light);border-color:var(--light)}
+.on-dark .btn.line:hover{background:var(--light);color:var(--dark)}
+
+/* the strip that says what this is */
+.strip{background:var(--dark);color:var(--light);font:500 13px/1.35 var(--display);padding:8px var(--gut);text-align:center;position:relative;z-index:5}
+
+/* header over the hero */
+.top{position:absolute;left:0;right:0;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:16px var(--gut)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--slate)}
+.brand img{width:52px;height:auto}
+.brand b{display:block;font:600 21px/1 var(--display)}
+.brand small{display:block;font:600 13px/1.4 var(--display);color:#5a1f27}
+body.still .brand small{color:#f3c9cf}
+.top .btn{min-height:44px;font-size:16px}
+
+/* hero: dusk to night on the deck */
+.hero{position:relative;height:270svh;background:#0e1b2a}
+.pin{position:sticky;top:0;height:100svh;overflow:hidden}
+.plane{position:absolute;left:0;top:0;transform-origin:100% 100%;will-change:transform}
+.plane img{width:100%;height:100%}
+.night{position:absolute;inset:0;background:#0d1a28;opacity:0;will-change:opacity}
+.glow{position:absolute;border-radius:50%;transform:translate(-50%,-50%);opacity:0;will-change:opacity;mix-blend-mode:screen;
+  background:radial-gradient(circle,rgba(255,226,168,.95) 0,rgba(255,196,120,.45) 28%,rgba(255,180,100,0) 70%)}
+.glow.fire{background:radial-gradient(circle,rgba(255,170,80,.7) 0,rgba(255,130,50,.3) 35%,rgba(255,120,40,0) 70%)}
+.swim{position:absolute;left:0;top:0;will-change:transform}
+.swim .swan{position:absolute;left:0;bottom:0;width:100%}
+.ripple{position:absolute;right:30%;bottom:-2px;height:14px;width:220%;overflow:hidden;transform-origin:100% 50%;will-change:transform}
+.ripple svg{width:100%;height:100%;display:block}
+.copy{position:absolute;z-index:3;left:var(--gut);right:var(--gut);top:clamp(92px,13vh,140px);max-width:900px}
+.mist{position:absolute;left:0;right:0;top:0;height:46%;z-index:2;display:none;background:linear-gradient(180deg,rgba(227,231,232,.9) 0,rgba(227,231,232,.72) 55%,rgba(227,231,232,0) 100%);will-change:opacity}
+.copy h1{font-size:clamp(40px,5.6vw,78px);color:var(--dark);letter-spacing:-.01em}
+.copy p{font-size:clamp(18px,1.6vw,21px);color:var(--dark);max-width:27em;margin-top:16px}
+.copy .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.hero.still .copy h1,.hero.still .copy p{color:#f3f5f5}
+.hero.still .copy .btn.line{color:#f3f5f5;border-color:#f3f5f5}
+.later{position:absolute;z-index:3;left:var(--gut);right:var(--gut);top:clamp(96px,16vh,170px);max-width:560px;opacity:0;color:#f3f5f5}
+.later p{font:500 clamp(24px,2.6vw,36px)/1.25 var(--display);margin:0}
+.later span{display:block;margin-top:14px;font:400 16px/1.4 var(--text);color:#cfd8dc}
+
+/* sections */
+section.s{padding:clamp(64px,10vw,128px) 0}
+.lede{font-size:20px;max-width:34em}
+.split{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(24px,4vw,64px);align-items:end}
+.split h2,.s h2{font-size:clamp(32px,4vw,54px);margin-bottom:22px}
+.photo{margin:0;background:#cfd6d8;border-radius:2px;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover}
+.cap{font:500 14px/1.4 var(--display);color:var(--muted);margin-top:10px}
+
+.board{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:clamp(36px,5vw,64px)}
+.board .photo{aspect-ratio:auto}
+.b1{grid-column:1/6;grid-row:span 2;aspect-ratio:2/3}
+.b2{grid-column:6/13;aspect-ratio:16/9}
+.b3{grid-column:6/9;aspect-ratio:3/4}
+.b4{grid-column:9/13;aspect-ratio:4/3;align-self:end}
+
+.onboard{columns:2;column-gap:48px;padding:0;margin:clamp(36px,5vw,56px) 0 0;list-style:none;max-width:900px}
+.onboard li{break-inside:avoid;padding:12px 0;border-top:1px solid var(--rule);font-size:18px}
+.onboard b{font:600 17px/1.3 var(--display);color:var(--slate);display:block}
+
+/* kayaks, on dark */
+.on-dark{background:var(--dark);color:#dfe5e7}
+.on-dark h2{color:#f1f3f3}
+.kayak{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:center}
+.kayak .photo{aspect-ratio:2/3;max-height:88svh}
+.kayak .photo img{object-position:40% 60%}
+.kayak blockquote{margin:28px 0 0;padding:0;font:500 22px/1.35 var(--display);color:#f1f3f3}
+.kayak cite{display:block;font:400 15px/1.4 var(--text);color:#aebbc1;font-style:normal;margin-top:8px}
+
+/* inside */
+.facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:8px 40px;margin:0 0 8px;padding:0;list-style:none;font:500 17px/1.4 var(--display);color:var(--slate)}
+.inside{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:clamp(36px,5vw,64px)}
+.i1{grid-column:1/9;aspect-ratio:3/2}
+.i2{grid-column:9/13;aspect-ratio:2/3;grid-row:span 2}
+.i3{grid-column:1/5;aspect-ratio:4/3}
+.i4{grid-column:5/9;aspect-ratio:4/3}
+.i5{grid-column:1/5;aspect-ratio:2/3}
+.i6{grid-column:5/13;aspect-ratio:16/10;align-self:start}
+.inside-notes{grid-column:1/-1;display:grid;grid-template-columns:1.3fr 1fr .9fr;gap:24px;margin-top:28px}
+.inside-notes p{font-size:17px;margin:0;border-top:1px solid var(--rule);padding-top:12px}
+
+/* river row */
+.river{background:var(--paper)}
+.row{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 var(--gut) 14px;margin-top:clamp(32px,4vw,52px);scrollbar-width:thin}
+.row figure{flex:0 0 auto;margin:0;scroll-snap-align:start}
+.row img{height:min(62svh,560px);width:auto;border-radius:2px}
+.row figcaption{font:500 14px/1.4 var(--display);color:var(--muted);margin-top:8px}
+
+/* built */
+.built{position:relative;color:#eef1f2;overflow:hidden}
+.built .bg{position:absolute;inset:0}
+.built .bg img{width:100%;height:100%;object-fit:cover}
+.built .scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,24,34,.92) 0,rgba(13,24,34,.78) 45%,rgba(13,24,34,.1) 80%)}
+.built .wrap{position:relative;padding-top:clamp(80px,12vw,160px);padding-bottom:clamp(80px,12vw,160px)}
+.built h2{color:#fff;max-width:13em;font-size:clamp(32px,4vw,54px);margin-bottom:22px}
+.built p{max-width:30em}
+.awards{list-style:none;padding:0;margin:26px 0 0;max-width:34em;font:400 16px/1.45 var(--display);color:#d6dee1}
+.awards li{padding:8px 0;border-top:1px solid rgba(255,255,255,.18)}
+
+/* getting there */
+.there{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(24px,5vw,72px);align-items:start}
+.there .photo{aspect-ratio:16/9}
+.dist{list-style:none;padding:0;margin:22px 0;font-family:var(--display)}
+.dist li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--rule);font-size:18px}
+.dist li span:last-child{color:var(--slate);font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.note{font-size:16px;color:var(--muted)}
+
+/* guests */
+.guests{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(24px,5vw,72px);align-items:center}
+.guests .photo{aspect-ratio:2/3;max-height:86svh}
+.quotes{list-style:none;margin:0;padding:0}
+.quotes li{padding:20px 0;border-top:1px solid var(--rule)}
+.quotes q{font:500 clamp(20px,2vw,25px)/1.35 var(--display);color:var(--slate);quotes:"\201C" "\201D"}
+.quotes span{display:block;font-size:15px;color:var(--muted);margin-top:6px}
+.score{font:600 17px/1.4 var(--display);color:var(--accent);margin-top:18px}
+
+/* book */
+.book{position:relative;min-height:92svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+.book .bg{position:absolute;inset:0}
+.book .bg img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.book .scrim{position:absolute;left:0;right:0;bottom:0;height:75%;background:linear-gradient(0deg,rgba(10,18,26,.94) 0,rgba(10,18,26,.7) 55%,rgba(10,18,26,0) 100%)}
+.book .wrap{position:relative;width:100%;padding-bottom:clamp(56px,8vw,96px)}
+.book .mark{width:84px;margin-bottom:18px}
+.book h2{color:#fff;font-size:clamp(34px,4.6vw,62px);max-width:12em}
+.book p{max-width:32em;color:#dbe3e6}
+.book .acts{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 22px}
+.book small{display:block;font:400 15px/1.5 var(--display);color:#b9c6cb}
+
+footer{background:var(--dark);color:#b9c6cb;font:400 14px/1.5 var(--display);padding:26px var(--gut) 110px;text-align:center}
+
+/* phone booking bar */
+.bar{display:none}
+@media (max-width:760px){
+  body{font-size:17px}
+  .top{padding:12px var(--gut)}
+  .brand img{width:42px}
+  .brand b{font-size:18px}
+  .top .btn{display:none}
+  .copy{top:84px}
+  .mist{display:block}
+  .copy h1{font-size:clamp(34px,9.6vw,44px)}
+  .copy p{font-size:17px;margin-top:10px;max-width:21em}
+  .copy .acts{display:none}
+  .later{top:92px}
+  .later p{font-size:24px}
+  .split,.kayak,.there,.guests{grid-template-columns:1fr}
+  .board{grid-template-columns:repeat(6,1fr);gap:8px}
+  .b1{grid-column:1/4;grid-row:span 1}
+  .b2{grid-column:1/7;grid-row:1;aspect-ratio:3/2}
+  .b3{grid-column:4/7;aspect-ratio:2/3}
+  .b4{grid-column:1/7;aspect-ratio:3/2}
+  .onboard{columns:1}
+  .facts{grid-template-columns:1fr 1fr;gap:6px 18px;font-size:16px}
+  .inside{grid-template-columns:repeat(6,1fr);gap:8px}
+  .i1{grid-column:1/7}
+  .i2{grid-column:1/4;grid-row:auto}
+  .i3{grid-column:4/7;aspect-ratio:2/3}
+  .i4{grid-column:1/7;aspect-ratio:3/2}
+  .i5{grid-column:1/4}
+  .i6{grid-column:4/7;aspect-ratio:2/3}
+  .inside-notes{grid-template-columns:1fr;gap:0}
+  .inside-notes p{padding:12px 0}
+  .row img{height:56svh}
+  .kayak .photo{max-height:none;order:-1}
+  .guests .photo{max-height:70svh}
+  .built .scrim{background:linear-gradient(180deg,rgba(13,24,34,.55) 0,rgba(13,24,34,.9) 40%,rgba(13,24,34,.94) 100%)}
+  .bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;gap:12px;align-items:center;justify-content:space-between;
+    padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:1px solid var(--rule);box-shadow:0 -6px 18px rgba(11,15,17,.12)}
+  .bar span{font:500 15px/1.25 var(--display);color:var(--slate)}
+  .bar span b{display:block;font-weight:600;font-size:16px}
+  .bar .btn{flex:0 0 auto;min-height:48px}
+}
+@media (max-height:520px) and (min-width:600px){
+  .copy{top:64px}
+  .copy h1{font-size:34px}
+  .copy p{display:none}
+  .copy .acts{margin-top:14px}
+  .later{top:64px}
+  .later p{font-size:22px}
+  .later span{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero{height:auto}
+  .pin{position:relative}
+}
+</style>
+</head>
+<body>
+<div class="strip">A website idea made by Lamplit Studio for Bill's Boathouse. Not their official site.</div>
+
+<header class="top">
+  <a class="brand" href="#top" aria-label="Bill's Boathouse, back to the top">
+    <img src="img/swan-mark.svg" alt="" width="639" height="500">
+    <span><b>Bill's Boathouse</b><small>Murray River</small></span>
+  </a>
+  <a class="btn" href="https://www.airbnb.com.au/h/billsboathouse2" rel="noopener">Check dates</a>
+</header>
+
+<main id="top">
+<section class="hero" aria-label="Bill's Boathouse at dusk">
+  <div class="pin" id="pin">
+    <div class="plane" id="back">
+      <img src="img/hero-back.jpg" alt="The deck of Bill's Boathouse at dusk, a fire burning in the bowl, the Murray River flat and still" width="2000" height="1335" fetchpriority="high">
+      <div class="night" id="nightB"></div>
+      <i class="glow" data-x=".6646" data-y=".4266" data-s=".055"></i>
+      <i class="glow" data-x=".6326" data-y=".4506" data-s=".05"></i>
+      <i class="glow" data-x=".6028" data-y=".4641" data-s=".046"></i>
+      <i class="glow fire" data-x=".4917" data-y=".612" data-s=".16"></i>
+    </div>
+    <div class="swim" id="swim" aria-hidden="true">
+      <div class="ripple" id="ripple"><svg viewBox="0 0 400 14" preserveAspectRatio="none"><path d="M0 8 C 25 2, 50 2, 75 7 S 125 12, 150 7 S 200 2, 225 7 S 275 12, 300 7 S 350 2, 375 7 L400 7" fill="none" stroke="#4b7fb5" stroke-width="3" stroke-linecap="round"/></svg></div>
+      <svg class="swan" viewBox="0 0 639 470" preserveAspectRatio="xMidYMax meet"><path fill="#060808" d="M562,28 547,13 530,5 508,4 490,8 470,17 456,27 438,47 426,68 421,82 416,106 416,153 421,178 456,269 455,272 425,255 366,215 329,195 297,186 284,185 261,188 254,192 254,201 208,205 195,208 181,214 176,221 176,228 171,228 161,232 153,241 155,245 154,248 139,252 137,254 137,262 131,268 132,279 130,285 132,290 112,299 109,304 110,309 95,323 93,329 70,328 47,332 52,346 67,372 87,392 138,420 195,437 228,442 435,441 476,433 501,420 522,404 535,391 546,376 557,349 560,331 560,314 553,286 544,268 525,241 495,205 476,174 469,156 464,134 464,100 469,81 475,68 486,53 500,43 509,44 519,59 534,72 547,78 557,74 559,72 559,65 553,55 559,51 563,58 573,58 573,51 570,42Z"/><path fill="#bb6571" d="M558,52 558,54 554,56 561,66 561,71 555,77 550,79 556,82 575,104 584,109 591,109 589,100 577,82 574,60 564,60Z"/></svg>
+    </div>
+    <div class="plane" id="front">
+      <img src="img/hero-front.webp" alt="" width="2000" height="1335">
+      <div class="night" id="nightF"></div>
+    </div>
+
+    <div class="mist" id="mist" aria-hidden="true"></div>
+    <div class="copy" id="copy">
+      <h1>Get back to nature and lose yourself.</h1>
+      <p>Bill's Boathouse is a tiny house moored on the Murray River at White Sands, for two. About an hour from Adelaide.</p>
+      <div class="acts"><a class="btn" href="https://www.airbnb.com.au/h/billsboathouse2" rel="noopener">Check dates</a><a class="btn line" href="#deck">See the deck</a></div>
+    </div>
+    <div class="later" id="later">
+      <p>When the sun decides to set, light the fire or soak in a steaming outdoor clawfoot bath.</p>
+      <span>After dark the pelicans fish around the festoon lights.</span>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="deck">
+  <div class="wrap">
+    <div class="split">
+      <figure class="photo" style="aspect-ratio:3/2"><img src="img/deck-fire-1400.jpg" srcset="img/deck-fire-800.jpg 800w, img/deck-fire-1400.jpg 1400w" sizes="(max-width:760px) 100vw, 58vw" alt="A guest by the fire bowl on the deck with a glass of wine, the sun going down over the river" width="1400" height="933" loading="lazy"></figure>
+      <div>
+        <h2>A wrap-around deck, straight onto the river</h2>
+        <p class="lede">Grab a deck chair or the hammock and watch the swans and pelicans come by. Fish off the edge, paddle out in a kayak, then light the fire when the sun goes.</p>
+      </div>
+    </div>
+    <div class="board">
+      <figure class="photo b1"><img src="img/hammock-800.jpg" srcset="img/hammock-800.jpg 800w, img/hammock-1400.jpg 1400w" sizes="(max-width:760px) 50vw, 40vw" alt="Reading in the hammock under the string lights and willow" width="800" height="1198" loading="lazy"></figure>
+      <figure class="photo b2"><img src="img/swans-1400.jpg" srcset="img/swans-800.jpg 800w, img/swans-1400.jpg 1400w" sizes="(max-width:760px) 100vw, 58vw" alt="Black swans swimming past the deck at dusk" width="1400" height="1050" loading="lazy"></figure>
+      <figure class="photo b3"><img src="img/bath-800.jpg" alt="The clawfoot bath on the deck, facing the water" width="800" height="1199" loading="lazy"></figure>
+      <figure class="photo b4"><img src="img/fishing-800.jpg" alt="A guest fishing from the end of the deck in the morning" width="800" height="1198" loading="lazy" style="object-position:50% 70%"></figure>
+    </div>
+    <ul class="onboard" aria-label="On board">
+      <li><b>Two kayaks</b>and life jackets</li>
+      <li><b>Two fishing rods</b>with tackle and a yabby net</li>
+      <li><b>A gas fire pit</b>all year, except on total fire ban days</li>
+      <li><b>An outdoor clawfoot bath</b>and an outdoor shower</li>
+      <li><b>A hammock and deck chairs</b>facing the water</li>
+      <li><b>A Weber barbecue</b>for nights you'd rather not cook inside</li>
+      <li><b>Local things to try</b>Saha Botanica organic teas, Beerenberg jams, Our Euphoria bath salts</li>
+      <li><b>Games, books and art supplies</b>and a desk if you came to make something</li>
+    </ul>
+  </div>
+</section>
+
+<section class="s on-dark">
+  <div class="wrap kayak">
+    <figure class="photo"><img src="img/kayak-1400.jpg" srcset="img/kayak-800.jpg 800w, img/kayak-1400.jpg 1400w" sizes="(max-width:760px) 100vw, 50vw" alt="A yellow kayak tied up beside the deck on a still morning" width="1400" height="2097" loading="lazy"></figure>
+    <div>
+      <h2>Kayak all day</h2>
+      <p>Two kayaks wait at the deck with life jackets. The river is wide and flat here, with willows along the bank, and the swans and pelicans come by every day.</p>
+      <p>In summer, on long weekends and in school holidays the river gets busier, with skiers out on the water. The rest of the time, guests mostly write about how quiet it is.</p>
+      <blockquote>“we loved the kayaks and wildlife that would come up and see us.”<cite>Lauren, October 2026, on Airbnb</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="inside">
+  <div class="wrap">
+    <h2>Inside: one room for two</h2>
+    <ul class="facts">
+      <li>Sleeps 2</li><li>Queen bed</li><li>Pets welcome</li>
+      <li>Kitchen</li><li>Rain shower</li><li>Heating and cooling</li>
+    </ul>
+    <div class="inside">
+      <figure class="photo i1"><img src="img/living-1400.jpg" srcset="img/living-800.jpg 800w, img/living-1400.jpg 1400w" sizes="(max-width:760px) 100vw, 64vw" alt="The living room, with the sliding doors open to the deck and the river" width="1400" height="934" loading="lazy"></figure>
+      <figure class="photo i2"><img src="img/lounge-800.jpg" srcset="img/lounge-800.jpg 800w, img/lounge-1400.jpg 1400w" sizes="(max-width:760px) 50vw, 32vw" alt="The lounge under the louvre windows" width="800" height="1198" loading="lazy"></figure>
+      <figure class="photo i3"><img src="img/bed-800.jpg" srcset="img/bed-800.jpg 800w, img/bed-1400.jpg 1400w" sizes="(max-width:760px) 50vw, 32vw" alt="The queen bed beside the window" width="800" height="533" loading="lazy"></figure>
+      <figure class="photo i4"><img src="img/bed-night-800.jpg" srcset="img/bed-night-800.jpg 800w, img/bed-night-1400.jpg 1400w" sizes="(max-width:760px) 100vw, 32vw" alt="The bedroom at night with a lamp on" width="800" height="533" loading="lazy"></figure>
+      <figure class="photo i5"><img src="img/kitchen-800.jpg" alt="The kitchen bench with pendant lights against the corten wall" width="800" height="1198" loading="lazy"></figure>
+      <figure class="photo i6"><img src="img/shower-800.jpg" alt="The rain shower behind frosted glass" width="800" height="1200" loading="lazy" style="object-position:50% 40%"></figure>
+      <div class="inside-notes">
+        <p>The bedroom has a built-in wardrobe, a queen bed in Sheridan linen and warm American oak driftwood floors.</p>
+        <p>The kitchen is small but complete: two burners, a toaster oven, a bar fridge and a little dishwasher. There's a plunger for coffee.</p>
+        <p>Shop in Murray Bridge on the way in. Guests find it hard to leave once they arrive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s river" aria-labelledby="riverH">
+  <div class="wrap">
+    <h2 id="riverH">Sunrise, sunset, and the mist in between</h2>
+    <p class="lede">River mist in the morning, sunsets over the water, stars at night, all from the same deck.</p>
+  </div>
+  <div class="row" tabindex="0" aria-label="Photos from the deck, scroll sideways">
+    <figure><img src="img/sunrise-800.jpg" srcset="img/sunrise-800.jpg 800w, img/sunrise-1400.jpg 1400w" sizes="60vw" alt="A guest with a mug watching the sun come up over the river" width="800" height="534" loading="lazy"><figcaption>Morning, from the deck</figcaption></figure>
+    <figure><img src="img/willow-800.jpg" srcset="img/willow-800.jpg 800w, img/willow-1400.jpg 1400w" sizes="60vw" alt="Sitting at the edge of the deck under the willow" width="800" height="534" loading="lazy"><figcaption>Under the willow</figcaption></figure>
+    <figure><img src="img/tea-800.jpg" alt="Pouring tea at the table by the window" width="800" height="1198" loading="lazy"><figcaption>Tea from Saha Botanica</figcaption></figure>
+    <figure><img src="img/sunset-deck-800.jpg" alt="The deck chairs and sail at sunset, the sky orange over the river" width="800" height="1201" loading="lazy"><figcaption>Sunset on the deck</figcaption></figure>
+    <figure><img src="img/sunset-800.jpg" srcset="img/sunset-800.jpg 800w, img/sunset-1400.jpg 1400w" sizes="60vw" alt="A guest standing on the deck against the last light" width="800" height="534" loading="lazy"><figcaption>The last light</figcaption></figure>
+    <figure><img src="img/buoy-800.jpg" srcset="img/buoy-800.jpg 800w, img/buoy-1400.jpg 1400w" sizes="60vw" alt="The boathouse's mooring buoy, numbered S130, on its chain at dusk" width="800" height="533" loading="lazy"><figcaption>Mooring S130</figcaption></figure>
+  </div>
+</section>
+
+<section class="built on-dark" aria-labelledby="builtH">
+  <div class="bg"><img src="img/aerial-night-1400.jpg" srcset="img/aerial-night-800.jpg 800w, img/aerial-night-1400.jpg 1400w" sizes="100vw" alt="Bill's Boathouse from above at night, lit up among the willows" width="1400" height="933" loading="lazy"></div>
+  <div class="scrim"></div>
+  <div class="wrap">
+    <h2 id="builtH">Built in 2016 from mostly recycled materials</h2>
+    <p>Chris Clarke, an award-winning builder, built the boathouse off site, away from the river, to keep its impact low, with low-energy lights, louvre windows for the breeze, double glazing and insulated floors, walls and ceilings.</p>
+    <ul class="awards">
+      <li>South Australian Tourism Awards, finalist 2024</li>
+      <li>Best Riverside Getaway, APAC Insider Australian Enterprise Awards 2023, 2024 and 2025</li>
+      <li>Airbnb Host Awards, Best Unique Stay, finalist</li>
+      <li>Australian Ecotourism Certified, and a Quality and Sustainable Tourism Accredited Business</li>
+    </ul>
+  </div>
+</section>
+
+<section class="s" aria-labelledby="thereH">
+  <div class="wrap there">
+    <div>
+      <h2 id="thereH">Riverglen Marina, White Sands</h2>
+      <p>The boathouse is moored for good at the Riverglen Marina Reserve, south-east of Adelaide, on Ngarrindjeri country. There are other houseboats in the marina, so you'll have neighbours on the water.</p>
+      <ul class="dist">
+        <li><span>Murray Bridge</span><span>about 15 min</span></li>
+        <li><span>Hahndorf</span><span>under an hour</span></li>
+        <li><span>Adelaide</span><span>about an hour</span></li>
+      </ul>
+      <p class="note">Pets are welcome on board. The water is right at the deck edge, so it isn't suited to small children.</p>
+    </div>
+    <figure class="photo"><img src="img/drone-1400.jpg" srcset="img/drone-800.jpg 800w, img/drone-1400.jpg 1400w" sizes="(max-width:760px) 100vw, 55vw" alt="Bill's Boathouse from the air, moored among the willows with its kayaks and deck" width="1400" height="788" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="s river" aria-labelledby="guestsH">
+  <div class="wrap guests">
+    <figure class="photo"><img src="img/bath-wine-800.jpg" srcset="img/bath-wine-800.jpg 800w, img/bath-wine-1400.jpg 1400w" sizes="(max-width:760px) 100vw, 42vw" alt="A guest in the outdoor bath with a glass of wine, looking out at the river" width="800" height="1200" loading="lazy"></figure>
+    <div>
+      <h2 id="guestsH">In guests' words</h2>
+      <ul class="quotes">
+        <li><q>The sunsets, fire, and visits from swans made it extra special.</q><span>Brodie, April 2026, on Airbnb</span></li>
+        <li><q>Just amazing waking up basically on the river and watching the stars on the deck.</q><span>Joseph, February 2026, on Airbnb</span></li>
+        <li><q>Quiet, relaxing, well appointed floating home that allowed us to truly wind down and relax.</q><span>Michael, January 2026, on Airbnb</span></li>
+      </ul>
+      <p class="score">4.90 from 397 reviews on Airbnb. Cheryl is a Superhost.</p>
+    </div>
+  </div>
+</section>
+
+<section class="book on-dark" id="book" aria-labelledby="bookH">
+  <div class="bg"><img src="img/aerial-night-1400.jpg" srcset="img/aerial-night-800.jpg 800w, img/aerial-night-1400.jpg 1400w" sizes="100vw" alt="" width="1400" height="933" loading="lazy" style="object-position:50% 30%"></div>
+  <div class="scrim"></div>
+  <div class="wrap">
+    <img class="mark" src="img/swan-mark.svg" alt="" width="639" height="500" style="filter:none">
+    <h2 id="bookH">Book a night on the river</h2>
+    <p>From A$320 a night, Sunday to Thursday, and A$360 on Friday and Saturday. Grazing boxes, breakfast in bed or a barbecue pack can be added before you arrive.</p>
+    <div class="acts">
+      <a class="btn" href="https://www.airbnb.com.au/h/billsboathouse2" rel="noopener">Check dates</a>
+      <a class="btn line" href="mailto:info@billsboathouse.com.au">Email Cheryl</a>
+    </div>
+    <small>Bookings are on Airbnb for now. Follow along at <a href="https://www.instagram.com/billsboathouse/" rel="noopener">@billsboathouse</a>.</small>
+  </div>
+</section>
+</main>
+
+<footer>A preview made by Lamplit Studio for Bill's Boathouse. Not affiliated, not live.</footer>
+
+<div class="bar" role="region" aria-label="Book">
+  <span><b>Bill's Boathouse</b>from A$320 a night</span>
+  <a class="btn" href="https://www.airbnb.com.au/h/billsboathouse2" rel="noopener">Check dates</a>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hero = document.querySelector('.hero'), pin = document.getElementById('pin');
+  var back = document.getElementById('back'), front = document.getElementById('front');
+  var nB = document.getElementById('nightB'), nF = document.getElementById('nightF');
+  var swim = document.getElementById('swim'), ripple = document.getElementById('ripple');
+  var copy = document.getElementById('copy'), later = document.getElementById('later'), mist = document.getElementById('mist');
+  var glows = [].slice.call(back.querySelectorAll('.glow'));
+  var IR = 2000 / 1335;
+  var W, H, X, Y, VW, VH, phone, sw;
+
+  function clamp(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function seg(p, a, b){ return clamp((p - a) / (b - a)); }
+  function ease(t){ return t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2; }
+
+  function layout(){
+    VW = pin.clientWidth; VH = pin.clientHeight; phone = VW < 760;
+    // cover the screen, keeping the deck and lights in view
+    var fx = phone ? .575 : .56, fy = phone ? .52 : .5;
+    if (VW / VH > IR){ W = VW; H = VW / IR; } else { H = VH; W = VH * IR; }
+    if (phone){ H *= 1.04; W = H * IR; }
+    X = Math.min(0, Math.max(VW - W, VW / 2 - fx * W));
+    Y = Math.min(0, Math.max(VH - H, VH / 2 - fy * H));
+    [back, front].forEach(function(p){ p.style.width = W + 'px'; p.style.height = H + 'px'; p.style.left = X + 'px'; p.style.top = Y + 'px'; });
+    glows.forEach(function(g){
+      var s = parseFloat(g.dataset.s) * W;
+      g.style.left = (parseFloat(g.dataset.x) * 100) + '%'; g.style.top = (parseFloat(g.dataset.y) * 100) + '%';
+      g.style.width = s + 'px'; g.style.height = s + 'px';
+    });
+    sw = phone ? Math.max(76, VW * .22) : Math.max(100, W * .075);
+    swim.style.width = sw + 'px'; swim.style.height = (sw * 470 / 639) + 'px';
+  }
+  // swan path in image fractions: from off the left edge to the open water short of the deck
+  function swanAt(t){
+    var x0 = phone ? (-X / W) - .06 : -.08, x1 = phone ? .5 : .38;
+    var y = phone ? .86 : .80;
+    return [x0 + (x1 - x0) * t, y];
+  }
+  function frame(p){
+    var dusk = ease(seg(p, .2, .85));
+    nB.style.opacity = (dusk * .5).toFixed(3);
+    nF.style.opacity = (dusk * .5).toFixed(3);
+    glows.forEach(function(g, i){ g.style.opacity = (ease(seg(p, .3 + i * .06, .62 + i * .06))).toFixed(3); });
+    var bs = 1 + .04 * ease(seg(p, 0, 1)), fs = 1 + (phone ? .08 : .1) * ease(seg(p, 0, 1));
+    back.style.transform = 'scale(' + bs.toFixed(4) + ')';
+    front.style.transform = 'scale(' + fs.toFixed(4) + ')';
+    // the swan sits in the back plane's space, so follow its scale about the bottom right corner
+    var t = ease(seg(p, .04, .7)), pt = swanAt(t);
+    var ox = X + W, oy = Y + H;
+    var sx = ox + (X + pt[0] * W - ox) * bs, sy = oy + (Y + pt[1] * H - oy) * bs;
+    sy = Math.min(sy, VH - 10);
+    swim.style.transform = 'translate(' + (sx - sw / 2).toFixed(1) + 'px,' + (sy - sw * 470 / 639).toFixed(1) + 'px)';
+    ripple.style.transform = 'scaleX(' + (0.15 + .85 * t).toFixed(3) + ')';
+    swim.style.opacity = seg(p, .03, .1).toFixed(3);
+    copy.style.opacity = (1 - seg(p, .18, .36)).toFixed(3);
+    copy.style.transform = 'translateY(' + (-seg(p, .18, .36) * 40).toFixed(1) + 'px)';
+    copy.style.visibility = p >= .355 ? 'hidden' : 'visible';
+    mist.style.opacity = (1 - seg(p, .18, .36)).toFixed(3);
+    later.style.opacity = seg(p, .62, .8).toFixed(3);
+  }
+  function progress(){
+    var r = hero.getBoundingClientRect(), span = hero.offsetHeight - VH;
+    return span > 0 ? clamp(-r.top / span) : 1;
+  }
+  var ticking = false;
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(function(){ ticking = false; frame(progress()); }); } }
+  function init(){
+    layout();
+    if (reduce){ frame(1); hero.classList.add('still'); document.body.classList.add('still'); copy.style.opacity = 1; copy.style.visibility = 'visible'; copy.style.transform = 'none'; later.style.opacity = 0; return; }
+    frame(progress());
+  }
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (mq.addEventListener) mq.addEventListener('change', function(){ location.reload(); });
+  window.addEventListener('resize', init);
+  if (!reduce) window.addEventListener('scroll', onScroll, { passive: true });
+  init();
+})();
+</script>
+</body>
+</html>
